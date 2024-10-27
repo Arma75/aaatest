@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Echo</title>
+</head>
+<body>
+    <h1>Input Echo</h1>
+    <input type="text" id="userInput">
+    <button onclick="submitInput()">Submit</button>
+    <div id="output"></div>
+
+    <script>
+        function submitInput() {
+            const input = document.getElementById("userInput").value;
+            fetch("/api/echo", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: input
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("output").innerHTML = data;
+            });
+        }
+    </script>
+</body>
+</html>
